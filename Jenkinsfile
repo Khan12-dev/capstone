@@ -36,7 +36,7 @@ pipeline {
 <p>Job: ${env.JOB_NAME}</p>
 <p>Build Number: ${env.BUILD_NUMBER}</p>
 <p>Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
-                to: "umerkhan2211@gmail.com",
+                to: "umerkhan2211e@gmail.com",
                 mimeType: 'text/html'
             )
         }
