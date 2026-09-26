@@ -13,13 +13,18 @@ def driver():
 
 
 def test_checkout_flow(driver):
+    wait = WebDriverWait(driver, 15)
+
     driver.get("https://www.saucedemo.com/")
 
-    driver.find_element(By.ID, "user-name").send_keys("standard_user")
+    wait.until(
+        EC.visibility_of_element_located((By.ID, "user-name"))
+    ).send_keys("standard_user")
+
     driver.find_element(By.ID, "password").send_keys("secret_sauce")
     driver.find_element(By.ID, "login-button").click()
 
-    add_buttons = WebDriverWait(driver, 10).until(
+    add_buttons = wait.until(
         EC.presence_of_all_elements_located(
             (By.CSS_SELECTOR, "button.btn_inventory")
         )
@@ -28,26 +33,31 @@ def test_checkout_flow(driver):
     for button in add_buttons:
         button.click()
 
-    driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+    wait.until(
+        EC.element_to_be_clickable((By.CLASS_NAME, "shopping_cart_link"))
+    ).click()
 
-    WebDriverWait(driver, 10).until(
+    wait.until(
         EC.element_to_be_clickable((By.ID, "checkout"))
     ).click()
 
-    driver.find_element(By.ID, "first-name").send_keys("Test")
+    wait.until(
+        EC.visibility_of_element_located((By.ID, "first-name"))
+    ).send_keys("Test")
+
     driver.find_element(By.ID, "last-name").send_keys("User")
     driver.find_element(By.ID, "postal-code").send_keys("12345")
 
-    driver.find_element(By.ID, "continue").click()
+    wait.until(
+        EC.element_to_be_clickable((By.ID, "continue"))
+    ).click()
 
-    WebDriverWait(driver, 10).until(
+    wait.until(
         EC.element_to_be_clickable((By.ID, "finish"))
     ).click()
 
-    success_message = WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(
-            (By.CLASS_NAME, "complete-header")
-        )
+    success_message = wait.until(
+        EC.visibility_of_element_located((By.CLASS_NAME, "complete-header"))
     ).text
 
     assert success_message == "Thank you for your order!"
