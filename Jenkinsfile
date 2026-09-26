@@ -45,7 +45,7 @@ pipeline {
                         Build Number: ${env.BUILD_NUMBER}<br>
                         Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a><br>
                         Report: <a href="${env.BUILD_URL}Capstone_20Test_20Report">Click Here</a></p>""",
-                to: "umerkhan0350@gmail.com",
+                to: "umerkhan2211e@gmail.com",
                 mimeType: 'text/html',
                 attachmentsPattern: 'report.html'
             )
